@@ -41,8 +41,16 @@ class EmailForm extends React.Component {
       }
     });
 
-    // Regular expression that checks for valid email
-    var pattern = /^([\w\.]*)@[a-zA-Z_]+?\.([a-zA-Z].{2,5}){0,1}$/;
+    // Logic to ensure final character is a letter. Essentially it pops
+    // the final character of the email address off and verifys the
+    // email is valid
+    let validFinalLetters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    if (!validFinalLetters.split('').includes(this.state.email.split('').pop())) {
+      return false;
+    }
+
+    // Regular expression logic that checks for valid email structure
+    var pattern = /^([\w\.]*)@[a-zA-Z_]+?\.[a-zA-Z].{2,6}$/;
 
     return pattern.test(this.state.email);
   }
@@ -71,16 +79,18 @@ class EmailForm extends React.Component {
           <h1>Email Validator</h1>
 
           <input
+            className='user-input'
             type='text'
             onChange={this.update('email')}
             placeholder={'Type email ...'}/>
           <br/>
           <input
+            className='submit'
             type='submit'
             value='Verify Email'/>
         </form>
 
-        <div>
+        <div className='result'>
           {this.state.submitMsg}
         </div>
       </div>
