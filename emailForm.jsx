@@ -4,9 +4,6 @@ class EmailForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = { email: '' };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.renderErrors = this.renderErrors.bind(this);
   }
 
   update(field) {
@@ -14,8 +11,6 @@ class EmailForm extends React.Component {
       [field] : e.currentTarget.value
     });
   }
-
-
 
   renderErrors() {
 
