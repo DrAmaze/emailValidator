@@ -13,12 +13,14 @@ class EmailForm extends React.Component {
     this.validMsg = this.validMsg.bind(this);
   }
 
+  // Updates the state as user inputs
   update(field) {
     return e => this.setState({
       [field] : e.currentTarget.value
     });
   }
 
+  // Handles the email validation logic and the output response
   handleSubmit(e) {
     e.preventDefault();
     let valid = this.verifyEmail(this.state.email);
@@ -26,6 +28,8 @@ class EmailForm extends React.Component {
     return this.validMsg(valid);
   }
 
+  // Logic for email validation check. First two checks are there for
+  // optimization purposes.
   verifyEmail(email) {
     // A simple check to ensure there is only one '@'
     let atCount = 0;
@@ -43,18 +47,24 @@ class EmailForm extends React.Component {
 
     // Logic to ensure final character is a letter. Essentially it pops
     // the final character of the email address off and verifys the
-    // email is valid
-    let validFinalLetters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    if (!validFinalLetters.split('').includes(this.state.email.split('').pop())) {
+    // email is valid. I utilize a set here for a check in constant time.
+    const validFinalLetters = new Set([
+      'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q',
+      'r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H',
+      'I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y',
+      'Z'
+    ]);
+    if (!validFinalLetters.has(this.state.email.split('').pop())) {
       return false;
     }
 
     // Regular expression logic that checks for valid email structure
-    var pattern = /^([\w\.]*)@[a-zA-Z_]+?\.[a-zA-Z].{2,6}$/;
+    let pattern = /^([\w\.]*)@[a-zA-Z_]+?\.[a-zA-Z].{2,6}$/;
 
     return pattern.test(this.state.email);
   }
 
+  // Response message based on validity of email
   validMsg(validEmail) {
     let email = this.state.email;
     if (email === '') {
