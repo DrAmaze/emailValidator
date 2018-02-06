@@ -11,6 +11,8 @@ The function should accept as input a string variable representing an email addr
 
 * In order to run the solution, download the zip or fork the repository.
 * Navigate to the main folder in your terminal.
+* Run the command `npm install` in your terminal.
+* Run the command `npm run webpack` in your terminal.
 * Open the full path of the `index.html` file in your browser.
 * Enjoy email validation checks!
 
