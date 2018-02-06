@@ -59,7 +59,7 @@ class EmailForm extends React.Component {
     }
 
     // Regular expression logic that checks for valid email structure
-    let pattern = /^([\w\.]*)@[a-zA-Z_]+?\.[a-zA-Z].{2,6}$/;
+    let pattern = /^([\w\.]+)@[a-zA-Z_]+?\.[a-zA-Z].{2,6}$/;
 
     return pattern.test(this.state.email);
   }

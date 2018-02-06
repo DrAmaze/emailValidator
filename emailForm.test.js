@@ -1,21 +1,19 @@
-import {
-  verifyEmail,
-  handleSubmit,
-  update,
-  validMsg
-} from './emailForm';
+import EmailForm from './emailForm';
 import React from 'react';
+import { shallow } from 'enzyme';
 
 describe('verifyEmail', () => {
+  const comp = shallow(<EmailForm />);
+
   describe('when given a proper email', () => {
     it('returns true', () => {
       const email1 = 'andrew@gmail.com';
       const email2 = 'jbutler8@terpmail.umd.edu';
       const email3 = 'THIS_GUY@EMAIL.EDU';
 
-      expect(verifyEmail(email1)).toBe(true);
-      expect(verifyEmail(email2)).toBe(true);
-      expect(verifyEmail(email3)).toBe(true);
+      expect(comp.verifyEmail(email1)).toBe(true);
+      expect(comp.verifyEmail(email2)).toBe(true);
+      expect(comp.verifyEmail(email3)).toBe(true);
     });
   });
 
@@ -29,13 +27,13 @@ describe('verifyEmail', () => {
       const email6 = 'jacob@gmail@umd.edu';
       const email7 = 'this@email.could.go.on.forever';
 
-      expect(verifyEmail(email1)).toBe(false);
-      expect(verifyEmail(email2)).toBe(false);
-      expect(verifyEmail(email3)).toBe(false);
-      expect(verifyEmail(email4)).toBe(false);
-      expect(verifyEmail(email5)).toBe(false);
-      expect(verifyEmail(email6)).toBe(false);
-      expect(verifyEmail(email7)).toBe(false);
+      expect(comp.verifyEmail(email1)).toBe(false);
+      expect(comp.verifyEmail(email2)).toBe(false);
+      expect(comp.verifyEmail(email3)).toBe(false);
+      expect(comp.verifyEmail(email4)).toBe(false);
+      expect(comp.verifyEmail(email5)).toBe(false);
+      expect(comp.verifyEmail(email6)).toBe(false);
+      expect(comp.verifyEmail(email7)).toBe(false);
     });
   });
 });
