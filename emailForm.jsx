@@ -39,9 +39,7 @@ class EmailForm extends React.Component {
 
         // optimize solution by breaking and returning false if two '@'
         // are found in the email address
-        if (atCount > 1) {
-          return false;
-        }
+        if (atCount > 1) return false;
       }
     });
 
